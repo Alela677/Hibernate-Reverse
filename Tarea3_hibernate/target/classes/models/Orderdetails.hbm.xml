@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 dic 2022 3:21:56 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="models.Orderdetails" table="orderdetails" catalog="classicmodels" optimistic-lock="version">
+        <composite-id name="id" class="models.OrderdetailsId">
+            <key-property name="orderNumber" type="int">
+                <column name="orderNumber" />
+            </key-property>
+            <key-property name="productCode" type="string">
+                <column name="productCode" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="orders" class="models.Orders" update="false" insert="false" fetch="select">
+            <column name="orderNumber" not-null="true" />
+        </many-to-one>
+        <many-to-one name="products" class="models.Products" update="false" insert="false" fetch="select">
+            <column name="productCode" length="15" not-null="true" />
+        </many-to-one>
+        <property name="quantityOrdered" type="int">
+            <column name="quantityOrdered" not-null="true" />
+        </property>
+        <property name="priceEach" type="big_decimal">
+            <column name="priceEach" precision="10" not-null="true" />
+        </property>
+        <property name="orderLineNumber" type="short">
+            <column name="orderLineNumber" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
